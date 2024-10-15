@@ -1,6 +1,6 @@
 import path from 'path';
-import {CorsOptions} from 'cors';
-import {configDotenv} from 'dotenv';
+import { CorsOptions } from 'cors';
+import { configDotenv } from 'dotenv';
 
 configDotenv();
 

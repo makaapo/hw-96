@@ -48,7 +48,7 @@ const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
   avatar: {
     type: String,
     required: true,
-  }
+  },
 });
 
 UserSchema.methods.checkPassword = function (password: string) {

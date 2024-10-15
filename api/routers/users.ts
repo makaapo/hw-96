@@ -2,8 +2,8 @@ import express from 'express';
 import User from '../models/User';
 import mongoose from 'mongoose';
 import config from '../config';
-import {OAuth2Client} from 'google-auth-library';
-import {imagesUpload} from '../multer';
+import { OAuth2Client } from 'google-auth-library';
+import { imagesUpload } from '../multer';
 const usersRouter = express.Router();
 const googleClient = new OAuth2Client(config.google.clientId);
 
