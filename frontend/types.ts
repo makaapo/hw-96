@@ -1,22 +1,22 @@
 export interface RegisterMutation {
-  username: string;
+  email: string;
   password: string;
   displayName: string;
   avatar: File | null;
 }
 
-export interface LoginMutation {
-  username: string;
-  password: string;
-}
-
 export interface User {
   _id: string;
-  username: string;
+  email: string;
   token: string;
   role: string;
   displayName: string;
-  avatar: string;
+  avatar: string | null;
+}
+
+export interface RegisterResponse {
+  message: string;
+  user: User;
 }
 
 export interface ValidationError {
@@ -28,7 +28,12 @@ export interface ValidationError {
   };
   message: string;
   name: string;
-  _message: string;
+  _name: string;
+}
+
+export interface LoginMutation {
+  email: string;
+  password: string;
 }
 
 export interface GlobalError {

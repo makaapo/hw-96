@@ -1,101 +1,100 @@
 import express from 'express';
 import User from '../models/User';
-import mongoose from 'mongoose';
 import config from '../config';
 import { OAuth2Client } from 'google-auth-library';
 import { imagesUpload } from '../multer';
+import { promises as fs } from 'fs';
+import axios from 'axios';
+import path from 'path';
+import { Error } from 'mongoose';
+import { randomUUID } from 'crypto';
+
 const usersRouter = express.Router();
+
 const googleClient = new OAuth2Client(config.google.clientId);
 
 usersRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
   try {
-    if (!req.body.username || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
       return res.status(400).send({ error: 'Username and password are required!' });
     }
     const user = new User({
-      username: req.body.username,
+      email: req.body.email,
       password: req.body.password,
       displayName: req.body.displayName,
       avatar: req.file ? req.file.filename : null,
     });
-
     user.generateToken();
     await user.save();
-    return res.send(user);
+    return res.send({ message: 'Registration complete!', user });
   } catch (error) {
-    if (error instanceof mongoose.Error.ValidationError) {
+    if (req.file) {
+      await fs.unlink(req.file.path);
+    }
+    if (error instanceof Error.ValidationError) {
       return res.status(400).send(error);
     }
-    next(error);
+    return next(error);
   }
 });
+
 usersRouter.post('/sessions', async (req, res, next) => {
   try {
-    if (!req.body.username || !req.body.password) {
+    if (!req.body.email || !req.body.password) {
       return res.status(400).send({ error: 'Username and password are required!' });
     }
-
-    const user = await User.findOne({ username: req.body.username });
-
+    const user = await User.findOne({ email: req.body.email });
     if (!user) {
       return res.status(400).send({ error: 'Username or Password not found!' });
     }
-
     const isMatch = await user.checkPassword(req.body.password);
-
     if (!isMatch) {
       return res.status(400).send({ error: 'Username or Password not found!' });
     }
-
     user.generateToken();
     await user.save();
-
-    return res.send(user);
-  } catch (e) {
-    next(e);
+    return res.send({ message: 'Email and password correct!', user });
+  } catch (error) {
+    next(error);
   }
 });
 
 usersRouter.post('/google', async (req, res, next) => {
   try {
     const ticket = await googleClient.verifyIdToken({
-      idToken: req.body.credential,
       audience: config.google.clientId,
+      idToken: req.body.credential,
     });
-
     const payload = ticket.getPayload();
-
     if (!payload) {
-      return res.status(400).send({ error: 'Google Login Error!' });
+      return res.status(400).send({ error: 'Google login error!' });
     }
-
-    const email = payload.email;
-    const id = payload.sub;
-    const displayName = payload.name;
+    const email = payload['email'];
+    const googleId = payload['sub'];
+    const displayName = payload['name'];
     const avatar = payload['picture'];
-
     if (!email) {
-      return res.status(400).send({ error: 'Not enough user data to continue!' });
+      return res.status(400).send({ error: 'Not enough user data to continue' });
     }
-
-    let user = await User.findOne({ googleID: id });
-
-    if (!user) {
-      const newPassword = crypto.randomUUID();
+    let user = await User.findOne({ googleID: googleId });
+    if (!user && avatar) {
+      const response = await axios.get(avatar, { responseType: 'arraybuffer' });
+      const fileName = 'images/' + randomUUID() + '.jpg';
+      const Path = path.join(config.publicPath, fileName);
+      await fs.writeFile(Path, response.data);
       user = new User({
-        username: email,
-        password: newPassword,
-        googleId: id,
+        email: randomUUID(),
+        password: randomUUID(),
+        googleID: googleId,
         displayName,
-        avatar,
+        avatar: fileName,
       });
+      user.generateToken();
+      await user.save();
+      return res.send({ message: 'Login with Google successful!', user });
     }
-
-    user.generateToken();
-    await user.save();
-    return res.send(user);
-  } catch (error) {
-    return next(error);
+  } catch (e) {
+    return next(e);
   }
 });
 
@@ -121,5 +120,4 @@ usersRouter.delete('/sessions', async (req, res, next) => {
     return next(error);
   }
 });
-
 export default usersRouter;
