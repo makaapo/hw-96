@@ -4,7 +4,7 @@ import { Avatar, Box, Button, CircularProgress, Grid, Link, TextField, Typograph
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectRegisterError, selectRegisterLoading } from './userSlice';
-import { RegisterMutation } from '../../../types';
+import { RegisterMutation } from '../../types';
 import { register } from './usersThunks';
 import FileInput from '../../UI/FileInput/FileInput';
 import LoginGoogle from './components/LoginGoogle';

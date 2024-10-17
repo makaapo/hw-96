@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { googleLogin, login, register } from './usersThunks';
-import { GlobalError, User, ValidationError } from '../../../types';
+import { GlobalError, User, ValidationError } from '../../types';
 
 interface UsersState {
   user: User | null;

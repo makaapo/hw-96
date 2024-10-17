@@ -3,7 +3,7 @@ import { Avatar, Grid, IconButton, Menu, MenuItem, Stack, Typography } from '@mu
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useAppDispatch } from '../../app/hooks';
-import { User } from '../../../types';
+import { User } from '../../types';
 import { API_URL } from '../../constants';
 import { logout } from '../../features/User/usersThunks';
 

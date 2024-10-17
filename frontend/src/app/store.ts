@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, persistStore } from 'redux-persist';
 import { usersReducer } from '../features/User/userSlice';
+import { CocktailsReducer } from '../features/Cocktail/cocktailSlice';
 
 const usersPersistConfig = {
   key: 'cocktails:users',
@@ -10,6 +11,7 @@ const usersPersistConfig = {
 };
 
 const rootReducer = combineReducers({
+  cocktails: CocktailsReducer,
   users: persistReducer(usersPersistConfig, usersReducer),
 });
 
