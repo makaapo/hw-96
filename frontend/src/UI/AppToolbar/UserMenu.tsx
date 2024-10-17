@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Avatar, Grid, IconButton, Menu, MenuItem, Stack, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import LogoutIcon from '@mui/icons-material/Logout';
+import LocalBarIcon from '@mui/icons-material/LocalBar';
 import { useAppDispatch } from '../../app/hooks';
 import { User } from '../../types';
 import { API_URL } from '../../constants';
@@ -41,6 +42,14 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         </IconButton>
       </Stack>
       <Menu open={isOpen} anchorEl={anchorEl} onClose={handleClose} keepMounted>
+        <MenuItem
+          onClick={() => {
+            navigate('/cocktails/new');
+          }}
+        >
+          <LocalBarIcon sx={{ mr: 2 }} />
+          Add cocktail
+        </MenuItem>
         <MenuItem onClick={handleLogout}>
           <LogoutIcon sx={{ mr: 2 }} />
           Logout
