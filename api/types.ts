@@ -1,4 +1,4 @@
-import { Model } from 'mongoose';
+import { Model, Types } from 'mongoose';
 
 export interface UserFields {
   email: string;
@@ -16,3 +16,17 @@ export interface UserMethods {
 }
 
 export type UserModel = Model<UserFields, {}, UserMethods>;
+
+export interface Ingredient {
+  name: string;
+  amount: string;
+}
+
+export interface CocktailMutation {
+  author: Types.ObjectId;
+  name: string;
+  image: string;
+  receipt: string;
+  isPublished: boolean;
+  ingredients: Ingredient[];
+}
