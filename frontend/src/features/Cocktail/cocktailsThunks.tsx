@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { Cocktail, CocktailMutation } from '../../types';
 import axiosApi from '../../axiosApi';
 
-export const getCocktails = createAsyncThunk<Cocktail[], string>('Cocktails/getAll', async () => {
+export const getCocktails = createAsyncThunk<Cocktail[]>('Cocktails/getAll', async () => {
   const { data: cocktails } = await axiosApi.get<Cocktail[]>('/cocktails');
   return cocktails;
 });

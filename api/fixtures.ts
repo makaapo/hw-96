@@ -46,7 +46,7 @@ const run = async () => {
         'Наполни рокс кубиками льда доверху, Налей в бокал нежирные сливки 30 мл, кофейный ликер 30 мл и водку 30 мл. Размешай коктейльной ложкой, пока не замерзнут стенки',
       author: user1._id,
       isPublished: true,
-      image: 'images/white-russian.jpg',
+      image: 'fixtures/white-russian.jpg',
       ingredients: [
         { name: 'Водка Царская', amount: '30ml' },
         { name: 'Кофейный ликер Fruko Schulz', amount: '30ml' },
@@ -60,7 +60,7 @@ const run = async () => {
         'Положи в хайбол лайм 3 дольки и подави мадлером. Возьми мяту 10 листиков в одну руку и хлопни по ним другой рукой .Положи мяту в хайбол. Наполни бокал дробленым льдом доверху. Добавь сахарный сироп 15 мл и белый ром 50 мл. Долей содовую доверху и аккуратно размешай коктейльной ложкой. Досыпь немного дробленого льда. Укрась веточкой мяты и долькой лайма',
       author: user1._id,
       isPublished: true,
-      image: 'images/mohito.jpg',
+      image: 'fixtures/mohito.jpg',
       ingredients: [
         { name: 'Белый ром', amount: '50ml' },
         { name: 'Сахарный сироп', amount: '15ml' },
@@ -76,7 +76,7 @@ const run = async () => {
         'Налей в шейкер лаймовый сок 30 мл, сахарный сироп 15 мл и белый ром 60 мл. Наполни шейкер кубиками льда и взбей. Перелей через стрейнер в охлажденное шампанское блюдце',
       author: user2._id,
       isPublished: true,
-      image: 'images/day.jpg',
+      image: 'fixtures/day.jpg',
       ingredients: [
         { name: 'Белый ром', amount: '60ml' },
         { name: 'Сахарный сироп', amount: '15ml' },
@@ -89,7 +89,7 @@ const run = async () => {
       receipt:
         'Налей в стопку кофейный ликер 15 мл. Используя коктейльную ложку, уложи слой айриш крим 15 мл и слой ликера трипл сек 15 мл. Поджигай, вооружайся трубочками и угощай!',
       author: user2._id,
-      image: 'images/b52.jpg',
+      image: 'fixtures/b52.jpg',
       ingredients: [
         { name: 'Кофейный ликер Fruko Schulz', amount: '15ml' },
         { name: 'Айриш крим', amount: '15ml' },

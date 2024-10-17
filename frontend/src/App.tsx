@@ -7,6 +7,7 @@ import { useAppSelector } from './app/hooks';
 import { selectUser } from './features/User/userSlice';
 import ProtectedRoute from './UI/ProtectedRoute/ProtectedRoute';
 import CocktailForm from './features/Cocktail/components/CocktailForm/CocktailForm';
+import CocktailsPage from './features/Cocktail/CoctailsPage/CoctailsPage';
 
 const App = () => {
   const user = useAppSelector(selectUser);
@@ -17,7 +18,7 @@ const App = () => {
       </header>
       <Container maxWidth="xl" component="main">
         <Routes>
-          <Route path="/" element={<Typography variant="h1">Home</Typography>} />
+          <Route path="/" element={<CocktailsPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route
