@@ -36,10 +36,10 @@ const OneCocktail = () => {
               </Typography>
               <Typography variant="h4">Ingredients:</Typography>
               <List>
-                {cocktail.ingredients.map((el) => (
-                  <ListItem key={Math.random()}>
+                {cocktail.ingredients.map((ingredient, index) => (
+                  <ListItem key={`${ingredient.name}-${index}`}>
                     <Typography>
-                      - {el.name} ... {el.amount}
+                      - {ingredient.name} ... {ingredient.amount}
                     </Typography>
                   </ListItem>
                 ))}
@@ -47,7 +47,7 @@ const OneCocktail = () => {
             </Grid>
             <Grid item xs={12}>
               <Typography gutterBottom variant="h4">
-                Receipt:
+                Recipe:
               </Typography>
               <Typography>{cocktail.receipt}</Typography>
             </Grid>
