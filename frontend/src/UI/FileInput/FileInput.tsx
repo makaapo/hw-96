@@ -48,7 +48,7 @@ const FileInput: React.FC<Props> = ({ onChange, name, label }) => {
           </Button>
         </Grid>
         {!filename.length && (
-          <Alert severity="error" sx={{ mt: 3, width: '100%' }}>
+          <Alert severity="error" sx={{ mt: 3, width: '100%', marginX: 2 }}>
             Please download file
           </Alert>
         )}

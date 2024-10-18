@@ -8,6 +8,7 @@ import { User } from '../../types';
 import { API_URL } from '../../constants';
 import { logout } from '../../features/User/usersThunks';
 import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
+import { getCocktails } from '../../features/Cocktail/cocktailsThunks';
 
 interface Props {
   user: User;
@@ -31,6 +32,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
 
   const handleLogout = async () => {
     await dispatch(logout());
+    await dispatch(getCocktails());
     navigate('/');
   };
 

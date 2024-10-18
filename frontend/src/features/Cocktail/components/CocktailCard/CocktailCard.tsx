@@ -50,8 +50,13 @@ const CocktailCard: React.FC<Props> = ({ cocktail }) => {
           <Typography gutterBottom variant="h5" component="div" textAlign="center">
             {cocktail.name}
           </Typography>
-          {!cocktail.isPublished && (
-            <Typography variant="body2" color="error">
+          {!cocktail.isPublished && user?.role === 'user' && (
+            <Typography textAlign="center" variant="body2" color="error">
+              Your cocktail is being reviewed by a moderator
+            </Typography>
+          )}
+          {!cocktail.isPublished && user?.role === 'admin' && (
+            <Typography textAlign="center" variant="body2" color="error">
               Unpublished
             </Typography>
           )}
