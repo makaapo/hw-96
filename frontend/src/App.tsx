@@ -9,6 +9,7 @@ import ProtectedRoute from './UI/ProtectedRoute/ProtectedRoute';
 import CocktailForm from './features/Cocktail/components/CocktailForm/CocktailForm';
 import CocktailsPage from './features/Cocktail/CoctailsPage/CoctailsPage';
 import CocktailsPageUser from './features/Cocktail/CoctailPageUser/CocktailsPageUser';
+import OneCocktail from './features/Cocktail/OneCocktail/OneCocktail';
 
 const App = () => {
   const user = useAppSelector(selectUser);
@@ -20,6 +21,7 @@ const App = () => {
       <Container maxWidth="xl" component="main">
         <Routes>
           <Route path="/" element={<CocktailsPage />} />
+          <Route path="/cocktails/:id" element={<OneCocktail />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route

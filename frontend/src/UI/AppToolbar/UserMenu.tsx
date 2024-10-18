@@ -23,7 +23,7 @@ const UserMenu: React.FC<Props> = ({ user }) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const imageUrl = API_URL + user.avatar;
+  const imageUrl = user.avatar ? `${API_URL}/${user.avatar}` : undefined;
 
   const handleClose = () => {
     setAnchorEl(null);
