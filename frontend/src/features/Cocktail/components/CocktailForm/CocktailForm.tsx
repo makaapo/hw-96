@@ -132,6 +132,7 @@ const CocktailForm = () => {
 
             <Grid item>
               <TextField
+                required
                 fullWidth
                 multiline
                 rows={4}
@@ -147,7 +148,7 @@ const CocktailForm = () => {
             </Grid>
 
             <Grid item>
-              <Button type="submit" fullWidth variant="contained" color="primary" disabled={loading}>
+              <Button type="submit" fullWidth variant="contained" color="primary" disabled={loading || !state.image}>
                 {loading ? <CircularProgress size={24} /> : 'Create'}
               </Button>
             </Grid>

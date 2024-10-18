@@ -11,6 +11,7 @@ import {
 
 interface InitialState {
   cocktails: Cocktail[];
+  userCocktails: Cocktail[];
   cocktail: Cocktail | null;
   isLoading: boolean;
   createLoading: boolean;
@@ -21,6 +22,7 @@ interface InitialState {
 
 const initialState: InitialState = {
   cocktails: [],
+  userCocktails: [],
   cocktail: null,
   isLoading: false,
   createLoading: false,
@@ -60,7 +62,7 @@ export const CocktailsSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getCocktailsByAuthor.fulfilled, (state, { payload: cocktails }) => {
-      state.cocktails = cocktails;
+      state.userCocktails = cocktails;
       state.isLoading = false;
     });
     builder.addCase(getCocktailsByAuthor.rejected, (state) => {
@@ -98,6 +100,7 @@ export const CocktailsSlice = createSlice({
     });
   },
   selectors: {
+    selectUserCocktails: (state) => state.userCocktails,
     selectCocktails: (state) => state.cocktails,
     selectOneCocktail: (state) => state.cocktail,
     selectOneCocktailFetching: (state) => state.oneFetching,
@@ -118,4 +121,5 @@ export const {
   selectCocktailDeleteLoading,
   selectCocktailFetching,
   selectCocktailCreateLoading,
+  selectUserCocktails,
 } = CocktailsSlice.selectors;

@@ -8,6 +8,7 @@ import { selectUser } from './features/User/userSlice';
 import ProtectedRoute from './UI/ProtectedRoute/ProtectedRoute';
 import CocktailForm from './features/Cocktail/components/CocktailForm/CocktailForm';
 import CocktailsPage from './features/Cocktail/CoctailsPage/CoctailsPage';
+import CocktailsPageUser from './features/Cocktail/CoctailPageUser/CocktailsPageUser';
 
 const App = () => {
   const user = useAppSelector(selectUser);
@@ -26,6 +27,14 @@ const App = () => {
             element={
               <ProtectedRoute isAllowed={Boolean(user)}>
                 <CocktailForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/cocktails/my-сocktails"
+            element={
+              <ProtectedRoute isAllowed={Boolean(user)}>
+                <CocktailsPageUser />
               </ProtectedRoute>
             }
           />

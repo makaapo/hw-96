@@ -24,7 +24,9 @@ cocktailRouter.get('/', roleForUser, async (req, res, next) => {
       return res.send(cocktails);
     }
     if (user) {
-      const cocktails = await Cocktail.find({ author: user._id });
+      const cocktails = await Cocktail.find({
+        $or: [{ isPublished: true }, { author: user._id }],
+      });
       return res.send(cocktails);
     }
     const cocktails = await Cocktail.find({ isPublished: true });

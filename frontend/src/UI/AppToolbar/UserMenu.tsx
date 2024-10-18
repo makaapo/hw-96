@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { User } from '../../types';
 import { API_URL } from '../../constants';
 import { logout } from '../../features/User/usersThunks';
+import SentimentSatisfiedAltIcon from '@mui/icons-material/SentimentSatisfiedAlt';
 
 interface Props {
   user: User;
@@ -42,6 +43,14 @@ const UserMenu: React.FC<Props> = ({ user }) => {
         </IconButton>
       </Stack>
       <Menu open={isOpen} anchorEl={anchorEl} onClose={handleClose} keepMounted>
+        <MenuItem
+          onClick={() => {
+            navigate('/cocktails/my-сocktails');
+          }}
+        >
+          <SentimentSatisfiedAltIcon sx={{ mr: 2 }} />
+          My cocktails
+        </MenuItem>
         <MenuItem
           onClick={() => {
             navigate('/cocktails/new');

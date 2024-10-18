@@ -16,22 +16,22 @@ const CocktailsPage = () => {
 
   return (
     <Container fixed>
-      {cocktails.length ? (
+      {loading ? (
+        <CircularProgress sx={{ display: 'block', margin: '0 auto' }} />
+      ) : cocktails.length ? (
         <>
           <Typography textAlign="center" variant="h2">
             Cocktails:
           </Typography>
           <Grid container gap={2}>
-            {loading ? (
-              <CircularProgress />
-            ) : (
-              cocktails.map((cocktail) => <CocktailCard key={cocktail._id} cocktail={cocktail} />)
-            )}
+            {cocktails.map((cocktail) => (
+              <CocktailCard key={cocktail._id} cocktail={cocktail} />
+            ))}
           </Grid>
         </>
       ) : (
         <Typography textAlign="center" variant="h2">
-          There is no cocktails yet
+          There are no cocktails yet
         </Typography>
       )}
     </Container>
